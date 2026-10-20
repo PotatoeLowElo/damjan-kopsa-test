@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Administracija | Damjan Kopša</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="admin.js" defer></script>
+</head>
+
+<body>
+    <section id="loginPage" class="login-page">
+        <div class="login-card">
+            <div class="brand-icon">DK</div>
+            <h1>Administracija</h1>
+            <p>Damjan Kopša · Občina Zavrč</p>
+
+            <form id="loginForm">
+                <label for="email">E-poštni naslov</label>
+                <input id="email" type="email" required autocomplete="username">
+
+                <label for="password">Geslo</label>
+                <input id="password" type="password" required autocomplete="current-password">
+
+                <button type="submit" id="loginButton">Prijava</button>
+            </form>
+
+            <p id="loginMessage" class="message" role="status"></p>
+            <a href="../index.html" class="back-link">← Nazaj na spletno stran</a>
+        </div>
+    </section>
+
+    <section id="mfaPage" class="login-page hidden">
+        <div class="login-card">
+            <div class="brand-icon">DK</div>
+            <h1>Varnostna potrditev</h1>
+            <p id="mfaIntro">Vnesi kodo iz aplikacije Authenticator.</p>
+
+            <img id="mfaQr" class="mfa-qr hidden" alt="QR-koda za Authenticator">
+            <p id="mfaSecret" class="mfa-secret hidden"></p>
+
+            <form id="mfaForm">
+                <label for="mfaCode">6-mestna koda</label>
+                <input id="mfaCode" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6"
+                    autocomplete="one-time-code" required>
+                <button id="mfaVerifyButton" type="submit">Potrdi prijavo</button>
+            </form>
+
+            <p id="mfaMessage" class="message" role="status"></p>
+            <button id="mfaCancelButton" class="mfa-cancel" type="button">
+                Odjava / Nazaj
+            </button>
+        </div>
+    </section>
+
+    <div id="dashboard" class="dashboard hidden">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Damjan Kopša</h2>
+                <span>ADMINISTRACIJA</span>
+            </div>
+
+            <nav>
+                <a href="#vprasanja" id="questionsNav" class="nav-active">
+                    ▦ Vprašanja občanov
+                </a>
+                <a href="#analitika" id="analyticsNav">
+                    ◫ Analitika obiskov
+                </a>
+                <a href="../index.html">⌂ Spletna stran</a>
+            </nav>
+
+            <button id="logoutButton" class="logout" type="button">
+                Odjava
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <section id="questionsView">
+                <header class="topbar">
+                    <div>
+                        <span class="eyebrow">NADZORNA PLOŠČA</span>
+                        <h1>Vprašanja občanov</h1>
+                        <p>Pregled prejetih vprašanj, priprava odgovorov in upravljanje javnih objav.</p>
+                    </div>
+                    <button id="refreshButton" class="secondary-button" type="button">
+                        ↻ Osveži
+                    </button>
+                </header>
+
+                <section class="stats">
+                    <div class="stat-card">
+                        <span>Vsa vprašanja</span>
+                        <strong id="totalCount">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Nova vprašanja</span>
+                        <strong id="newCount">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Pripravljeni odgovori</span>
+                        <strong id="progressCount">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Objavljeni odgovori</span>
+                        <strong id="doneCount">0</strong>
+                    </div>
+                </section>
+
+                <section class="proposals-section">
+                    <div class="section-heading">
+                        <h2>Prejeta vprašanja</h2>
+                        <select id="statusFilter" aria-label="Filtriraj vprašanja">
+                            <option value="Vsi">Vsa vprašanja</option>
+                            <option value="Nov">Nova vprašanja</option>
+                            <option value="V obravnavi">Pripravljeni odgovori</option>
+                            <option value="Zaključen">Objavljeni odgovori</option>
+                        </select>
+                    </div>
+
+                    <p id="dashboardMessage" class="message" role="status"></p>
+                    <div id="proposalsList" class="proposals-list">
+                        <p class="empty-state">Nalaganje vprašanj ...</p>
+                    </div>
+                </section>
+            </section>
+
+            <section id="analyticsView" class="hidden">
+                <header class="topbar">
+                    <div>
+                        <span class="eyebrow">NADZORNA PLOŠČA</span>
+                        <h1>Analitika obiskov</h1>
+                        <p>Pregled obiskanosti javne spletne strani.</p>
+                    </div>
+                    <button id="analyticsRefresh" class="secondary-button" type="button">
+                        ↻ Osveži
+                    </button>
+                </header>
+
+                <section class="stats">
+                    <div class="stat-card">
+                        <span>Obiski danes</span>
+                        <strong id="visitsToday">—</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Obiski zadnjih 7 dni</span>
+                        <strong id="visitsWeek">—</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Obiski zadnjih 30 dni</span>
+                        <strong id="visitsMonth">—</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span>Ogledi strani (30 dni)</span>
+                        <strong id="pageViewsMonth">—</strong>
+                    </div>
+                </section>
+
+                <section class="proposals-section">
+                    <div class="section-heading">
+                        <h2>Obiskanost po dnevih</h2>
+                    </div>
+                    <p id="analyticsMessage" class="message" role="status"></p>
+                    <div id="analyticsChart" class="analytics-chart"></div>
+                    <p class="analytics-footnote">
+                        Podatki iz Cloudflare Web Analytics. Administratorski obiski se ne merijo.
+                    </p>
+                </section>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

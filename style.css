@@ -1,0 +1,1292 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --green: #005337;
+    --green-dark: #003e2b;
+    --green-light: #e8f1eb;
+    --yellow: #ffdc00;
+    --black: #17211d;
+    --gray: #63716a;
+    --light: #f5f7f4;
+    --white: #ffffff;
+    --shadow: 0 15px 45px rgba(0, 50, 30, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+.logo {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.container {
+    width: min(1180px, 90%);
+    margin: auto;
+}
+
+/* NAVIGACIJA */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 3px 25px rgba(0, 0, 0, 0.05);
+}
+
+.nav {
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--green);
+}
+
+.logo small {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gray);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--green);
+}
+
+.nav-button {
+    padding: 12px 20px;
+    background: var(--green);
+    color: white !important;
+    border-radius: 6px;
+}
+
+.nav-button:hover {
+    background: var(--green-dark);
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: none;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+/* NASLOVNA STRAN */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(120deg, #f5f8f5, #ffffff);
+}
+
+.hero-grid {
+    min-height: 640px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 70px;
+    padding-top: 65px;
+    padding-bottom: 65px;
+}
+
+.eyebrow,
+.section-label {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    margin-top: 20px;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -3px;
+}
+
+.hero h1 span,
+.section-content h2 span {
+    color: var(--green);
+}
+
+.hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--green);
+    font-size: 27px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.hero-description {
+    max-width: 540px;
+    color: var(--gray);
+    font-size: 17px;
+    margin-top: 22px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 25px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: var(--green);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.btn-outline:hover {
+    background: var(--green-light);
+}
+
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    height: 490px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 180px 180px 15px 15px;
+    box-shadow: var(--shadow);
+}
+
+.hero-image-accent {
+    position: absolute;
+    width: 95%;
+    height: 85%;
+    right: -15px;
+    bottom: -17px;
+    border-radius: 180px 180px 15px 15px;
+    background: var(--yellow);
+}
+
+/* ZELEN TRAK */
+
+.intro-strip {
+    background: var(--green);
+    color: white;
+    padding: 18px 0;
+    text-align: center;
+}
+
+.intro-strip p {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.intro-strip span {
+    color: var(--yellow);
+    margin: 0 18px;
+}
+
+/* SPLOSNI RAZDELKI */
+
+.section {
+    padding: 110px 0;
+}
+
+.section-light {
+    background: var(--light);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 85px;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    max-height: 550px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.about-image::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    left: -18px;
+    bottom: -18px;
+    background: var(--yellow);
+    z-index: -1;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: clamp(29px, 3.5vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-top: 12px;
+}
+
+.underline {
+    width: 65px;
+    height: 5px;
+    background: var(--yellow);
+    border-radius: 5px;
+    margin: 25px 0;
+}
+
+.section-content p {
+    color: var(--gray);
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.text-link {
+    display: inline-block;
+    color: var(--green);
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.center-line {
+    margin: 25px auto;
+}
+
+.section-description {
+    color: var(--gray);
+    max-width: 730px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+}
+
+/* KANDIDATURA */
+
+.quote-card {
+    max-width: 760px;
+    margin: 40px auto 0;
+    padding: 45px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-bottom: 5px solid var(--yellow);
+}
+
+.quote-mark {
+    display: block;
+    font-size: 70px;
+    color: var(--green);
+    line-height: 1;
+}
+
+.quote-card p {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.quote-card strong {
+    color: var(--green);
+}
+
+/* PROGRAM */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 55px;
+}
+
+.program-card {
+    padding: 32px 25px;
+    background: white;
+    border: 1px solid #e6ece7;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: 0.25s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--green);
+}
+
+.card-icon {
+    width: 58px;
+    height: 58px;
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 24px;
+}
+
+.program-card h3 {
+    font-size: 17px;
+    margin-bottom: 14px;
+}
+
+.program-card p {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+/* ZELEN RAZDELEK S FOTOGRAFIJO */
+
+.banner {
+    background: var(--green);
+    color: white;
+    padding: 75px 0;
+    overflow: hidden;
+}
+
+.banner-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+    align-items: center;
+    gap: 60px;
+}
+
+.banner .section-label {
+    color: var(--yellow);
+}
+
+.banner h2 {
+    margin-bottom: 20px;
+}
+
+.banner p {
+    color: #dce9df;
+}
+
+.banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* PREDLOGI OBCANOV */
+
+.proposal-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.proposal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    padding: 38px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+.proposal-form h3 {
+    font-size: 23px;
+    color: var(--green);
+}
+
+.form-note {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.proposal-form label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.proposal-form input,
+.proposal-form select,
+.proposal-form textarea {
+    width: 100%;
+    border: 1px solid #d9e2db;
+    background: #fafcfa;
+    padding: 14px 15px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.proposal-form input:focus,
+.proposal-form select:focus,
+.proposal-form textarea:focus {
+    border-color: var(--green);
+}
+
+.proposal-form textarea {
+    resize: vertical;
+}
+
+.proposal-form button {
+    margin-top: 15px;
+}
+
+.form-message {
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* NOGA STRANI */
+
+.footer {
+    background: #10291e;
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.footer-content h3 {
+    margin-bottom: 12px;
+}
+
+.footer-content p {
+    color: #c4d5ca;
+    max-width: 400px;
+    font-size: 14px;
+}
+
+.footer-content a {
+    color: white;
+    transition: color 0.2s;
+}
+
+.footer-content a:hover {
+    color: var(--yellow);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #365245;
+    padding-top: 20px;
+    color: #c4d5ca;
+    font-size: 13px;
+}
+
+/* TABLICE */
+
+@media (max-width: 1000px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .proposal-grid {
+        gap: 40px;
+    }
+
+    .banner-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+        gap: 35px;
+    }
+}
+
+/* TELEFONI */
+
+@media (max-width: 768px) {
+    .nav {
+        min-height: 75px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        padding: 25px 5%;
+        background: white;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    nav.open {
+        display: flex;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .proposal-grid,
+    .banner-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-grid {
+        padding-top: 70px;
+        padding-bottom: 75px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero-image {
+        margin-top: 25px;
+    }
+
+    .hero-image img {
+        height: 420px;
+        max-width: 350px;
+    }
+
+    .hero-image-accent {
+        max-width: 350px;
+        right: auto;
+    }
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .about-image {
+        max-width: 450px;
+    }
+
+    .banner {
+        padding: 60px 0;
+    }
+
+    .banner-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .banner img {
+        width: 100%;
+        max-width: 380px;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+}
+
+/* MANJSI TELEFONI */
+
+@media (max-width: 480px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .hero-subtitle {
+        font-size: 23px;
+    }
+
+    .intro-strip p {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .intro-strip span {
+        margin: 0 5px;
+    }
+
+    .proposal-form {
+        padding: 24px;
+    }
+
+    .quote-card {
+        padding: 28px;
+    }
+
+    .banner img {
+        max-width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+
+@media (min-width: 1001px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.program-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.1);
+}
+
+.answers-list {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+    max-width: 850px;
+    margin: 25px auto 35px;
+    text-align: left;
+}
+
+.answer-card {
+    padding: 28px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+}
+
+.answer-card h3 {
+    margin: 0 0 14px;
+    color: #173f30;
+}
+
+.answer-card p {
+    margin: 0;
+    line-height: 1.8;
+}
+
+@media (min-width: 1001px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .program-card {
+        transition: none;
+    }
+}
+
+/* DAMJAN ODGOVARJA */
+
+.answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 850px;
+    margin: 35px auto;
+    text-align: left;
+}
+
+.answer-card {
+    background: #ffffff;
+    border: 1px solid #e2e9e4;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.035);
+    transition: border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.answer-card:hover {
+    border-color: #a7c4b2;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+.answer-card[open] {
+    border-color: #176447;
+    box-shadow: 0 12px 30px rgba(0, 65, 42, 0.07);
+}
+
+.answer-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 26px;
+    cursor: pointer;
+    list-style: none;
+    color: #173f30;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.answer-question::-webkit-details-marker {
+    display: none;
+}
+
+.answer-question::marker {
+    content: "";
+}
+
+.answer-question:focus-visible {
+    outline: 3px solid #e6c800;
+    outline-offset: -4px;
+}
+
+.answer-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #edf5f0;
+    color: #176447;
+    font-size: 24px;
+    font-weight: 400;
+    transition: transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.answer-card[open] .answer-icon {
+    transform: rotate(45deg);
+    background: #f5eeb6;
+}
+
+.answer-content {
+    padding: 0 26px 26px;
+    border-top: 1px solid #eef1ee;
+}
+
+.answer-label {
+    display: block;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #176447;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.answer-content p {
+    margin: 0;
+    color: #46564e;
+    font-size: 15px;
+    line-height: 1.85;
+    white-space: pre-line;
+}
+
+@media (max-width: 600px) {
+    .answer-question {
+        padding: 19px;
+        font-size: 15px;
+    }
+
+    .answer-content {
+        padding: 0 19px 22px;
+    }
+}
+
+
+/* KARTICE Z VPRAŠANJI IN ODGOVORI */
+
+.answers-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 1150px;
+    margin: 38px auto;
+    text-align: left;
+}
+
+.flip-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 190px;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    perspective: 1100px;
+    font: inherit;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flip-card-inner {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(.2, .75, .2, 1);
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 19px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    overflow: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background: #ffffff;
+    border: 1px solid #e0e8e2;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    color: #173f30;
+}
+
+.flip-card-back {
+    background: #07543c;
+    color: #ffffff;
+    transform: rotateY(180deg);
+    box-shadow: 0 10px 28px rgba(0, 55, 36, 0.14);
+}
+
+.flip-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    line-height: 1.5;
+}
+
+.flip-card-front .flip-label {
+    color: #267553;
+}
+
+.flip-card-back .flip-label {
+    color: #e8d84e;
+}
+
+.flip-question {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.flip-answer {
+    display: block;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.flip-hint {
+    display: block;
+    font-size: 11px;
+    opacity: 0.75;
+    line-height: 1.4;
+}
+
+.flip-card:focus-visible {
+    outline: 3px solid #e6c800;
+    outline-offset: 4px;
+}
+
+@media (hover: hover) {
+    .flip-card:not(.flipped):hover .flip-card-front {
+        border-color: #247c59;
+        box-shadow: 0 14px 35px rgba(0, 60, 35, 0.12);
+    }
+}
+
+@media (max-width: 1100px) {
+    .answers-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .answers-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .flip-card {
+        min-height: 170px;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        padding: 14px;
+    }
+
+    .flip-question {
+        font-size: 14px;
+    }
+
+    .flip-answer {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flip-card-inner {
+        transition: none;
+    }
+}
+
+
+.answers-gallery-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+}
+
+.answers-gallery-button[hidden] {
+    display: none !important;
+}
+
+
+/* GLADKO PREMIKANJE PO STRANI */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+/* LEPŠI PREHODI GUMBOV */
+
+.btn,
+button {
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+@media (hover: hover) {
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 70, 45, 0.14);
+    }
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* NEŽEN UČINEK NA KARTICAH */
+
+@media (hover: hover) {
+    .priority-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 35px rgba(0, 55, 35, 0.10);
+    }
+}
+
+/* DOSTOPNOST */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .btn,
+    button,
+    .priority-card {
+        transition: none;
+    }
+}
+
+/* ANIMIRAN MOBILNI MENI */
+
+.menu-toggle {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    background: #073e2d;
+    border-radius: 3px;
+    transition:
+        transform 0.3s ease,
+        opacity 0.2s ease;
+}
+
+.menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    #navigation {
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    #navigation:not(.open) {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        pointer-events: none;
+    }
+
+    #navigation.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .menu-toggle span,
+    #navigation {
+        transition: none;
+    }
+}
+
+
+/* KARTICE VPRAŠANJ NA TELEFONU */
+
+@media (max-width: 700px) {
+    .answers-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        margin: 30px auto;
+    }
+
+    .flip-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 175px;
+        aspect-ratio: 1 / 1.15;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        padding: 12px;
+    }
+
+    .flip-question {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .flip-answer {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .flip-hint {
+        font-size: 10px;
+    }
+}
+
+/* Na telefonu prikaži samo prve 4 kartice */
+@media (max-width: 700px) {
+    .answers-list .flip-card:nth-child(n+5) {
+        display: none;
+    }
+}
+
