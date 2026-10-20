@@ -20,6 +20,7 @@ const statusFilter = $("statusFilter");
 let questions = [];
 let pendingFactorId = null;
 let authFlowBusy = false;
+let analyticsRequestId = 0;
 
 function showLogin() {
     loginPage.classList.remove("hidden");
@@ -28,6 +29,7 @@ function showLogin() {
     pendingFactorId = null;
     mfaCode.value = "";
     questions = [];
+    analyticsRequestId++;
 }
 
 function showMfa() {
@@ -216,6 +218,7 @@ $("mfaForm").addEventListener("submit", async event => {
 });
 
 async function logout() {
+    analyticsRequestId++;
     await db.auth.signOut();
     showLogin();
     loginForm.reset();
@@ -476,6 +479,10 @@ function renderQuestions() {
     });
 }
 
+// ============================================
+// ADMINISTRACIJA - PREKLOP MED ZAVIHKI
+// ============================================
+
 const questionsView = $("questionsView");
 const analyticsView = $("analyticsView");
 const questionsNav = $("questionsNav");
@@ -493,6 +500,8 @@ function setAdminView(view) {
 
     if (analytics) {
         loadAnalytics();
+    } else {
+        analyticsRequestId++;
     }
 }
 
@@ -508,28 +517,121 @@ analyticsNav.addEventListener("click", event => {
 
 $("analyticsRefresh").addEventListener("click", loadAnalytics);
 
-async function loadAnalytics() {
-    if (!await requireAal2()) {
-        await continueAuth();
+// ============================================
+// ANALITIKA OBISKOV - POPRAVLJEN GRAF
+// ============================================
+
+function normalizeAnalyticsDays(rawDays) {
+    if (!Array.isArray(rawDays)) {
+        return [];
+    }
+
+    const byDate = new Map();
+
+    for (const day of rawDays) {
+        if (!day || typeof day.date !== "string") {
+            continue;
+        }
+
+        const date = day.date.slice(0, 10);
+
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+            continue;
+        }
+
+        const visits = Number(day.visits);
+
+        byDate.set(date, {
+            date,
+            visits: Number.isFinite(visits)
+                ? Math.max(0, visits)
+                : 0
+        });
+    }
+
+    return [...byDate.values()]
+        .sort((a, b) => a.date.localeCompare(b.date))
+        .slice(-7);
+}
+
+function renderAnalyticsChart(days) {
+    const chart = $("analyticsChart");
+
+    chart.replaceChildren();
+
+    if (!days.length) {
         return;
     }
 
-    analyticsMessage.textContent = "Nalagam statistiko ...";
+    const max = Math.max(
+        1,
+        ...days.map(day => day.visits)
+    );
 
-    const ids = [
-        "visitsToday",
-        "visitsWeek",
-        "visitsMonth",
-        "pageViewsMonth"
-    ];
+    for (const day of days) {
+        const count = day.visits;
 
-    ids.forEach(id => {
-        $(id).textContent = "—";
-    });
+        const bar = createElement(
+            "div",
+            "analytics-bar"
+        );
 
-    $("analyticsChart").replaceChildren();
+        const value = createElement(
+            "span",
+            "analytics-bar-value",
+            count.toLocaleString("sl-SI")
+        );
+
+        const fill = createElement(
+            "div",
+            "analytics-bar-fill"
+        );
+
+        const label = createElement(
+            "span",
+            "analytics-bar-label",
+            day.date.slice(5)
+        );
+
+        fill.style.height =
+            `${Math.max(2, (count / max) * 130)}px`;
+
+        bar.append(value, fill, label);
+        chart.appendChild(bar);
+    }
+}
+
+async function loadAnalytics() {
+    const requestId = ++analyticsRequestId;
 
     try {
+        if (!await requireAal2()) {
+            if (requestId === analyticsRequestId) {
+                await continueAuth();
+            }
+            return;
+        }
+
+        if (requestId !== analyticsRequestId) {
+            return;
+        }
+
+        analyticsMessage.textContent =
+            "Nalagam statistiko ...";
+
+        const ids = [
+            "visitsToday",
+            "visitsWeek",
+            "visitsMonth",
+            "pageViewsMonth"
+        ];
+
+        for (const id of ids) {
+            $(id).textContent = "—";
+        }
+
+        $("analyticsChart").replaceChildren();
+
         const { data, error } = await db.functions.invoke(
             "analytics-stats",
             {
@@ -538,14 +640,26 @@ async function loadAnalytics() {
             }
         );
 
+        if (requestId !== analyticsRequestId) {
+            return;
+        }
+
         if (error) {
-            let detail = error.message;
+            let detail = error.message ||
+                "Neznana napaka";
 
             if (error.context?.json) {
                 try {
-                    const payload = await error.context.json();
-                    detail = payload?.error || detail;
-                } catch (_) { }
+                    const payload =
+                        await error.context.json();
+
+                    detail =
+                        payload?.error ||
+                        payload?.message ||
+                        detail;
+                } catch (_) {
+                    // Odgovor ni v formatu JSON.
+                }
             }
 
             throw new Error(detail);
@@ -553,62 +667,47 @@ async function loadAnalytics() {
 
         if (data?.ok === true) {
             for (const id of ids) {
-                const value = data[id];
+                const value = Number(data[id]);
 
-                $(id).textContent = Number.isFinite(value)
-                    ? value.toLocaleString("sl-SI")
-                    : "—";
+                $(id).textContent =
+                    data[id] !== null &&
+                    data[id] !== undefined &&
+                    Number.isFinite(value)
+                        ? value.toLocaleString("sl-SI")
+                        : "—";
             }
 
-            const days = Array.isArray(data.days)
-                ? data.days.slice(-7)
-                : [];
-
-            const chart = $("analyticsChart");
-            const max = Math.max(
-                1,
-                ...days.map(day => Number(day.visits) || 0)
+            const days = normalizeAnalyticsDays(
+                data.days
             );
 
-            for (const day of days) {
-                const count = Number(day.visits) || 0;
+            renderAnalyticsChart(days);
 
-                const bar = createElement("div", "analytics-bar");
-                const value = createElement(
-                    "span", "analytics-bar-value", String(count)
-                );
-                const fill = createElement(
-                    "div", "analytics-bar-fill"
-                );
-                const label = createElement(
-                    "span",
-                    "analytics-bar-label",
-                    String(day.date).slice(5)
-                );
-
-                fill.style.height =
-                    `${Math.max(2, count / max * 130)}px`;
-
-                bar.append(value, fill, label);
-                chart.append(bar);
-            }
-
-            analyticsMessage.textContent = days.length
-                ? ""
-                : "Za graf še ni podatkov.";
+            analyticsMessage.textContent =
+                days.length > 0
+                    ? ""
+                    : "Za graf še ni podatkov.";
 
         } else if (data?.success === true) {
             analyticsMessage.textContent =
                 "Povezava s Cloudflare deluje. " +
-                "Za prikaz številk morava še urediti izračun statistike v Edge Function.";
+                "Za prikaz številk je treba še urediti " +
+                "izračun statistike v Edge Function.";
         } else {
             throw new Error(
-                data?.error || "Podatki niso na voljo."
+                data?.error ||
+                "Podatki niso na voljo."
             );
         }
+
     } catch (error) {
+        if (requestId !== analyticsRequestId) {
+            return;
+        }
+
         analyticsMessage.textContent =
-            "Napaka pri nalaganju analitike: " + error.message;
+            "Napaka pri nalaganju analitike: " +
+            error.message;
     }
 }
 
