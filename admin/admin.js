@@ -464,7 +464,69 @@ function renderQuestions() {
             }
         });
 
-        bottom.append(status, saveButton, publishButton);
+        const deleteButton = createElement(
+            "button",
+            "admin-action delete-question-button",
+            "Izbriši vprašanje"
+        );
+
+        deleteButton.type = "button";
+
+        deleteButton.addEventListener("click", async () => {
+            const confirmed = confirm(
+                "Ali res želite trajno izbrisati to vprašanje?\n\n" +
+                question.vprasanje + "\n\n" +
+                "Izbrisan bo tudi morebitni odgovor. " +
+                "Tega dejanja ni mogoče razveljaviti."
+            );
+
+            if (!confirmed) return;
+
+            deleteButton.disabled = true;
+            dashboardMessage.textContent = "Brišem vprašanje ...";
+
+            try {
+                if (!await requireAal2()) {
+                    throw new Error(
+                        "Za brisanje je potrebna potrjena prijava z Authenticatorjem."
+                    );
+                }
+
+                if (!await checkAdmin()) {
+                    throw new Error("Nimate dovoljenja za brisanje vprašanj.");
+                }
+
+                const { data, error } = await db
+                    .from("vprasanja")
+                    .delete()
+                    .eq("id", question.id)
+                    .select("id");
+
+                if (error) throw error;
+
+                if (!data || data.length !== 1) {
+                    throw new Error(
+                        "Vprašanje ni bilo izbrisano. Preverite dovoljenja v Supabase."
+                    );
+                }
+
+                questions = questions.filter(q => q.id !== question.id);
+
+                updateStats();
+                renderQuestions();
+
+                dashboardMessage.textContent =
+                    "Vprašanje je bilo uspešno in trajno izbrisano.";
+
+            } catch (error) {
+                dashboardMessage.textContent =
+                    "Napaka pri brisanju: " + error.message;
+
+                deleteButton.disabled = false;
+            }
+        });
+
+        bottom.append(status, saveButton, publishButton, deleteButton);
 
         card.append(
             top,
@@ -671,8 +733,8 @@ async function loadAnalytics() {
 
                 $(id).textContent =
                     data[id] !== null &&
-                    data[id] !== undefined &&
-                    Number.isFinite(value)
+                        data[id] !== undefined &&
+                        Number.isFinite(value)
                         ? value.toLocaleString("sl-SI")
                         : "—";
             }
