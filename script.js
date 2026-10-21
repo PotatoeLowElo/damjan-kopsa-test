@@ -19,47 +19,51 @@ const SUPABASE_ANON_KEY =
 
 // MOBILNI MENI
 
-menuToggle.addEventListener("click", () => {
-    const isOpen = navigation.classList.toggle("open");
+if (menuToggle && navigation) {
+    menuToggle.addEventListener("click", () => {
+        const isOpen = navigation.classList.toggle("open");
 
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.classList.toggle("is-active", isOpen);
-});
-
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        navigation.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.classList.remove("is-active");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.classList.toggle("is-active", isOpen);
     });
-});
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            navigation.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.classList.remove("is-active");
+        });
+    });
+}
 
 
 // AKTIVNI RAZDELEK
 
 const sections = document.querySelectorAll("main section[id]");
 
-const sectionObserver = new IntersectionObserver(
-    entries => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
+if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
 
-            const id = entry.target.id;
+                const id = entry.target.id;
 
-            navLinks.forEach(link => {
-                link.classList.toggle(
-                    "active",
-                    link.getAttribute("href") === `#${id}`
-                );
+                navLinks.forEach(link => {
+                    link.classList.toggle(
+                        "active",
+                        link.getAttribute("href") === `#${id}`
+                    );
+                });
             });
-        });
-    },
-    {
-        rootMargin: "-20% 0px -65% 0px"
-    }
-);
+        },
+        {
+            rootMargin: "-20% 0px -65% 0px"
+        }
+    );
 
-sections.forEach(section => sectionObserver.observe(section));
+    sections.forEach(section => sectionObserver.observe(section));
+}
 
 
 // ANIMACIJE OB PREMIKANJU
@@ -72,23 +76,57 @@ animatedElements.forEach(element => {
     element.classList.add("reveal");
 });
 
-const animationObserver = new IntersectionObserver(
-    entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                animationObserver.unobserve(entry.target);
-            }
-        });
-    },
-    {
-        threshold: 0.1
-    }
-);
+if ("IntersectionObserver" in window) {
+    const animationObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    animationObserver.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.1
+        }
+    );
 
-animatedElements.forEach(element => {
-    animationObserver.observe(element);
-});
+    animatedElements.forEach(element => {
+        animationObserver.observe(element);
+    });
+} else {
+    animatedElements.forEach(element => {
+        element.classList.add("visible");
+    });
+}
+
+
+// PRETVORBA SEKUND V URE IN MINUTE
+
+function formatRemainingTime(seconds) {
+    const remaining = Math.max(0, Math.ceil(Number(seconds)));
+
+    if (!Number.isFinite(remaining)) {
+        return null;
+    }
+
+    const hours = Math.floor(remaining / 3600);
+    const minutes = Math.ceil((remaining % 3600) / 60);
+
+    if (hours > 0 && minutes > 0) {
+        return `${hours} ur in ${minutes} minut`;
+    }
+
+    if (hours > 0) {
+        return `${hours} ur`;
+    }
+
+    if (minutes > 0) {
+        return `${minutes} minut`;
+    }
+
+    return "manj kot minuto";
+}
 
 
 // ODDAJA VPRAŠANJ
@@ -96,81 +134,116 @@ animatedElements.forEach(element => {
 const questionForm = document.getElementById("questionForm");
 const formMessage = document.getElementById("formMessage");
 
-questionForm.addEventListener("submit", async event => {
-    event.preventDefault();
+if (questionForm && formMessage) {
+    questionForm.addEventListener("submit", async event => {
+        event.preventDefault();
 
-    const button = document.getElementById("submitQuestion");
+        const button = document.getElementById("submitQuestion");
 
-    const token = document.querySelector(
-        '[name="cf-turnstile-response"]'
-    )?.value;
+        const token = document.querySelector(
+            '[name="cf-turnstile-response"]'
+        )?.value;
 
-    if (!token) {
-        formMessage.textContent =
-            "Potrdite varnostno preverjanje.";
-        return;
-    }
-
-    const payload = {
-        kategorija: document.getElementById("category").value,
-        vprasanje: document.getElementById("question").value.trim(),
-        ime: document.getElementById("person").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        captcha: token
-    };
-
-    if (
-        payload.vprasanje.length < 10 ||
-        payload.vprasanje.length > 5000
-    ) {
-        formMessage.textContent =
-            "Vprašanje mora vsebovati od 10 do 5000 znakov.";
-        return;
-    }
-
-    button.disabled = true;
-    formMessage.textContent = "Pošiljanje vprašanja ...";
-
-    try {
-        const response = await fetch(QUESTION_FUNCTION_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            throw new Error("Oddaja ni uspela.");
+        if (!token) {
+            formMessage.textContent =
+                "Potrdite varnostno preverjanje.";
+            return;
         }
 
-        questionForm.reset();
+        const payload = {
+            kategorija: document.getElementById("category").value,
+            vprasanje: document.getElementById("question").value.trim(),
+            ime: document.getElementById("person").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            captcha: token
+        };
 
-        if (window.turnstile) {
-            window.turnstile.reset();
+        if (
+            payload.vprasanje.length < 10 ||
+            payload.vprasanje.length > 5000
+        ) {
+            formMessage.textContent =
+                "Vprašanje mora vsebovati od 10 do 5000 znakov.";
+            return;
         }
 
-        formMessage.textContent =
-            "Vprašanje je bilo uspešno poslano. Hvala!";
+        button.disabled = true;
+        formMessage.textContent = "Pošiljanje vprašanja ...";
 
-    } catch (error) {
-        formMessage.textContent =
-            "Vprašanja trenutno ni mogoče poslati. Poskusite pozneje.";
+        try {
+            const response = await fetch(QUESTION_FUNCTION_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
 
-        if (window.turnstile) {
-            window.turnstile.reset();
+            let result = {};
+
+            try {
+                result = await response.json();
+            } catch (_) {
+                // Strežnik ni vrnil veljavnega JSON odgovora.
+            }
+
+            if (!response.ok) {
+                const remainingSeconds =
+                    Number(result.preostale_sekunde);
+
+                if (
+                    result.preostale_sekunde != null &&
+                    Number.isFinite(remainingSeconds) &&
+                    remainingSeconds > 0
+                ) {
+                    const remainingTime =
+                        formatRemainingTime(remainingSeconds);
+
+                    formMessage.textContent =
+                        "Z vašega omrežja je bilo vprašanje že poslano. " +
+                        `Novo vprašanje lahko pošljete čez ${remainingTime}.`;
+                } else {
+                    formMessage.textContent =
+                        result.message ||
+                        result.error ||
+                        "Vprašanja trenutno ni mogoče poslati. Poskusite pozneje.";
+                }
+
+                return;
+            }
+
+            questionForm.reset();
+
+            if (window.turnstile) {
+                window.turnstile.reset();
+            }
+
+            formMessage.textContent =
+                "Vprašanje je bilo uspešno poslano. Hvala!";
+
+        } catch (error) {
+            console.error("Napaka pri oddaji vprašanja:", error);
+
+            formMessage.textContent =
+                "Povezava s strežnikom ni uspela. Poskusite pozneje.";
+
+        } finally {
+            if (window.turnstile) {
+                window.turnstile.reset();
+            }
+
+            button.disabled = false;
         }
-
-    } finally {
-        button.disabled = false;
-    }
-});
+    });
+}
 
 
 // JAVNI ODGOVORI
 
 async function loadPublicAnswers() {
     const container = document.getElementById("answersList");
+
+    if (!container) return;
 
     try {
         const response = await fetch(PUBLIC_ANSWERS_URL, {
@@ -204,8 +277,6 @@ async function loadPublicAnswers() {
             container.appendChild(message);
             return;
         }
-
-
 
         answers.slice(0, 5).forEach(item => {
             const card = document.createElement("button");
@@ -269,8 +340,6 @@ async function loadPublicAnswers() {
             container.appendChild(card);
         });
 
-
-
     } catch (error) {
         container.textContent =
             "Odgovorov trenutno ni mogoče prikazati.";
@@ -282,5 +351,8 @@ loadPublicAnswers();
 
 // LETNICA
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+const yearElement = document.getElementById("year");
+
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+}
