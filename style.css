@@ -2218,3 +2218,25 @@ button {
         grid-column: 4 / span 2;
     }
 }
+
+/* SREDINSKA RAZPOREDITEV PETIH KARTIC */
+
+@media (min-width: 901px) {
+    #program .cards {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    #program .program-card {
+        grid-column: span 2;
+    }
+
+    #program .program-card:nth-child(4) {
+        grid-column: 2 / span 2;
+    }
+
+    #program .program-card:nth-child(5) {
+        grid-column: 4 / span 2;
+    }
+}
+
