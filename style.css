@@ -1,0 +1,2220 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --green: #005337;
+    --green-dark: #003e2b;
+    --green-light: #e8f1eb;
+    --yellow: #ffdc00;
+    --black: #17211d;
+    --gray: #63716a;
+    --light: #f5f7f4;
+    --white: #ffffff;
+    --shadow: 0 15px 45px rgba(0, 50, 30, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+.logo {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.container {
+    width: min(1180px, 90%);
+    margin: auto;
+}
+
+/* NAVIGACIJA */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 3px 25px rgba(0, 0, 0, 0.05);
+}
+
+.nav {
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--green);
+}
+
+.logo small {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gray);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--green);
+}
+
+.nav-button {
+    padding: 12px 20px;
+    background: var(--green);
+    color: white !important;
+    border-radius: 6px;
+}
+
+.nav-button:hover {
+    background: var(--green-dark);
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: none;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+/* NASLOVNA STRAN */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(120deg, #f5f8f5, #ffffff);
+}
+
+.hero-grid {
+    min-height: 640px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 70px;
+    padding-top: 65px;
+    padding-bottom: 65px;
+}
+
+.eyebrow,
+.section-label {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    margin-top: 20px;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -3px;
+}
+
+.hero h1 span,
+.section-content h2 span {
+    color: var(--green);
+}
+
+.hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--green);
+    font-size: 27px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.hero-description {
+    max-width: 540px;
+    color: var(--gray);
+    font-size: 17px;
+    margin-top: 22px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 25px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: var(--green);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.btn-outline:hover {
+    background: var(--green-light);
+}
+
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    height: 490px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 180px 180px 15px 15px;
+    box-shadow: var(--shadow);
+}
+
+.hero-image-accent {
+    position: absolute;
+    width: 95%;
+    height: 85%;
+    right: -15px;
+    bottom: -17px;
+    border-radius: 180px 180px 15px 15px;
+    background: var(--yellow);
+}
+
+/* ZELEN TRAK */
+
+.intro-strip {
+    background: var(--green);
+    color: white;
+    padding: 18px 0;
+    text-align: center;
+}
+
+.intro-strip p {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.intro-strip span {
+    color: var(--yellow);
+    margin: 0 18px;
+}
+
+/* SPLOSNI RAZDELKI */
+
+.section {
+    padding: 110px 0;
+}
+
+.section-light {
+    background: var(--light);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 85px;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    max-height: 550px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.about-image::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    left: -18px;
+    bottom: -18px;
+    background: var(--yellow);
+    z-index: -1;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: clamp(29px, 3.5vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-top: 12px;
+}
+
+.underline {
+    width: 65px;
+    height: 5px;
+    background: var(--yellow);
+    border-radius: 5px;
+    margin: 25px 0;
+}
+
+.section-content p {
+    color: var(--gray);
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.text-link {
+    display: inline-block;
+    color: var(--green);
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.center-line {
+    margin: 25px auto;
+}
+
+.section-description {
+    color: var(--gray);
+    max-width: 730px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+}
+
+/* KANDIDATURA */
+
+.quote-card {
+    max-width: 760px;
+    margin: 40px auto 0;
+    padding: 45px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-bottom: 5px solid var(--yellow);
+}
+
+.quote-mark {
+    display: block;
+    font-size: 70px;
+    color: var(--green);
+    line-height: 1;
+}
+
+.quote-card p {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.quote-card strong {
+    color: var(--green);
+}
+
+/* PROGRAM */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 55px;
+}
+
+.program-card {
+    padding: 32px 25px;
+    background: white;
+    border: 1px solid #e6ece7;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: 0.25s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--green);
+}
+
+.card-icon {
+    width: 58px;
+    height: 58px;
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 24px;
+}
+
+.program-card h3 {
+    font-size: 17px;
+    margin-bottom: 14px;
+}
+
+.program-card p {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+/* ZELEN RAZDELEK S FOTOGRAFIJO */
+
+.banner {
+    background: var(--green);
+    color: white;
+    padding: 75px 0;
+    overflow: hidden;
+}
+
+.banner-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+    align-items: center;
+    gap: 60px;
+}
+
+.banner .section-label {
+    color: var(--yellow);
+}
+
+.banner h2 {
+    margin-bottom: 20px;
+}
+
+.banner p {
+    color: #dce9df;
+}
+
+.banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* PREDLOGI OBCANOV */
+
+.proposal-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.proposal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    padding: 38px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+.proposal-form h3 {
+    font-size: 23px;
+    color: var(--green);
+}
+
+.form-note {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.proposal-form label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.proposal-form input,
+.proposal-form select,
+.proposal-form textarea {
+    width: 100%;
+    border: 1px solid #d9e2db;
+    background: #fafcfa;
+    padding: 14px 15px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.proposal-form input:focus,
+.proposal-form select:focus,
+.proposal-form textarea:focus {
+    border-color: var(--green);
+}
+
+.proposal-form textarea {
+    resize: vertical;
+}
+
+.proposal-form button {
+    margin-top: 15px;
+}
+
+.form-message {
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* NOGA STRANI */
+
+.footer {
+    background: #10291e;
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.footer-content h3 {
+    margin-bottom: 12px;
+}
+
+.footer-content p {
+    color: #c4d5ca;
+    max-width: 400px;
+    font-size: 14px;
+}
+
+.footer-content a {
+    color: white;
+    transition: color 0.2s;
+}
+
+.footer-content a:hover {
+    color: var(--yellow);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #365245;
+    padding-top: 20px;
+    color: #c4d5ca;
+    font-size: 13px;
+}
+
+/* TABLICE */
+
+@media (max-width: 1000px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .proposal-grid {
+        gap: 40px;
+    }
+
+    .banner-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+        gap: 35px;
+    }
+}
+
+/* TELEFONI */
+
+@media (max-width: 768px) {
+    .nav {
+        min-height: 75px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        padding: 25px 5%;
+        background: white;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    nav.open {
+        display: flex;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .proposal-grid,
+    .banner-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-grid {
+        padding-top: 70px;
+        padding-bottom: 75px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero-image {
+        margin-top: 25px;
+    }
+
+    .hero-image img {
+        height: 420px;
+        max-width: 350px;
+    }
+
+    .hero-image-accent {
+        max-width: 350px;
+        right: auto;
+    }
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .about-image {
+        max-width: 450px;
+    }
+
+    .banner {
+        padding: 60px 0;
+    }
+
+    .banner-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .banner img {
+        width: 100%;
+        max-width: 380px;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+}
+
+/* MANJSI TELEFONI */
+
+@media (max-width: 480px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .hero-subtitle {
+        font-size: 23px;
+    }
+
+    .intro-strip p {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .intro-strip span {
+        margin: 0 5px;
+    }
+
+    .proposal-form {
+        padding: 24px;
+    }
+
+    .quote-card {
+        padding: 28px;
+    }
+
+    .banner img {
+        max-width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+
+@media (min-width: 1001px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.program-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.1);
+}
+
+.answers-list {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+    max-width: 850px;
+    margin: 25px auto 35px;
+    text-align: left;
+}
+
+.answer-card {
+    padding: 28px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+}
+
+.answer-card h3 {
+    margin: 0 0 14px;
+    color: #173f30;
+}
+
+.answer-card p {
+    margin: 0;
+    line-height: 1.8;
+}
+
+@media (min-width: 1001px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .program-card {
+        transition: none;
+    }
+}
+
+/* DAMJAN ODGOVARJA */
+
+.answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 850px;
+    margin: 35px auto;
+    text-align: left;
+}
+
+.answer-card {
+    background: #ffffff;
+    border: 1px solid #e2e9e4;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.035);
+    transition: border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.answer-card:hover {
+    border-color: #a7c4b2;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+.answer-card[open] {
+    border-color: #176447;
+    box-shadow: 0 12px 30px rgba(0, 65, 42, 0.07);
+}
+
+.answer-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 26px;
+    cursor: pointer;
+    list-style: none;
+    color: #173f30;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.answer-question::-webkit-details-marker {
+    display: none;
+}
+
+.answer-question::marker {
+    content: "";
+}
+
+.answer-question:focus-visible {
+    outline: 3px solid #e6c800;
+    outline-offset: -4px;
+}
+
+.answer-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #edf5f0;
+    color: #176447;
+    font-size: 24px;
+    font-weight: 400;
+    transition: transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.answer-card[open] .answer-icon {
+    transform: rotate(45deg);
+    background: #f5eeb6;
+}
+
+.answer-content {
+    padding: 0 26px 26px;
+    border-top: 1px solid #eef1ee;
+}
+
+.answer-label {
+    display: block;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    color: #176447;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.answer-content p {
+    margin: 0;
+    color: #46564e;
+    font-size: 15px;
+    line-height: 1.85;
+    white-space: pre-line;
+}
+
+@media (max-width: 600px) {
+    .answer-question {
+        padding: 19px;
+        font-size: 15px;
+    }
+
+    .answer-content {
+        padding: 0 19px 22px;
+    }
+}
+
+
+/* KARTICE Z VPRAŠANJI IN ODGOVORI */
+
+.answers-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    width: 100%;
+    max-width: 1150px;
+    margin: 38px auto;
+    text-align: left;
+}
+
+.flip-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 190px;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    perspective: 1100px;
+    font: inherit;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flip-card-inner {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(.2, .75, .2, 1);
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 19px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    overflow: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background: #ffffff;
+    border: 1px solid #e0e8e2;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    color: #173f30;
+}
+
+.flip-card-back {
+    background: #07543c;
+    color: #ffffff;
+    transform: rotateY(180deg);
+    box-shadow: 0 10px 28px rgba(0, 55, 36, 0.14);
+}
+
+.flip-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    line-height: 1.5;
+}
+
+.flip-card-front .flip-label {
+    color: #267553;
+}
+
+.flip-card-back .flip-label {
+    color: #e8d84e;
+}
+
+.flip-question {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.flip-answer {
+    display: block;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.flip-hint {
+    display: block;
+    font-size: 11px;
+    opacity: 0.75;
+    line-height: 1.4;
+}
+
+.flip-card:focus-visible {
+    outline: 3px solid #e6c800;
+    outline-offset: 4px;
+}
+
+@media (hover: hover) {
+    .flip-card:not(.flipped):hover .flip-card-front {
+        border-color: #247c59;
+        box-shadow: 0 14px 35px rgba(0, 60, 35, 0.12);
+    }
+}
+
+@media (max-width: 1100px) {
+    .answers-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .answers-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .flip-card {
+        min-height: 170px;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        padding: 14px;
+    }
+
+    .flip-question {
+        font-size: 14px;
+    }
+
+    .flip-answer {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flip-card-inner {
+        transition: none;
+    }
+}
+
+
+.answers-gallery-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+}
+
+.answers-gallery-button[hidden] {
+    display: none !important;
+}
+
+
+/* GLADKO PREMIKANJE PO STRANI */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+/* LEPŠI PREHODI GUMBOV */
+
+.btn,
+button {
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+@media (hover: hover) {
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 70, 45, 0.14);
+    }
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* NEŽEN UČINEK NA KARTICAH */
+
+@media (hover: hover) {
+    .priority-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 35px rgba(0, 55, 35, 0.10);
+    }
+}
+
+/* DOSTOPNOST */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .btn,
+    button,
+    .priority-card {
+        transition: none;
+    }
+}
+
+/* ANIMIRAN MOBILNI MENI */
+
+.menu-toggle {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    background: #073e2d;
+    border-radius: 3px;
+    transition:
+        transform 0.3s ease,
+        opacity 0.2s ease;
+}
+
+.menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    #navigation {
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    #navigation:not(.open) {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        pointer-events: none;
+    }
+
+    #navigation.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .menu-toggle span,
+    #navigation {
+        transition: none;
+    }
+}
+
+
+/* KARTICE VPRAŠANJ NA TELEFONU */
+
+@media (max-width: 700px) {
+    .answers-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        margin: 30px auto;
+    }
+
+    .flip-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 175px;
+        aspect-ratio: 1 / 1.15;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        padding: 12px;
+    }
+
+    .flip-question {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .flip-answer {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .flip-hint {
+        font-size: 10px;
+    }
+}
+
+/* Na telefonu prikaži samo prve 4 kartice */
+@media (max-width: 700px) {
+    .answers-list .flip-card:nth-child(n+5) {
+        display: none;
+    }
+}
+
+
+/* POSODOBLJENE KARTICE PRIORITET */
+
+.program-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e4ebe6;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 10px 35px rgba(0, 65, 43, 0.045);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.program-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #006447;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(0, 65, 43, 0.1);
+    border-color: #bfd9cb;
+}
+
+.program-card:hover::before {
+    opacity: 1;
+}
+
+.program-card .card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #e8f2ec;
+    color: #00543b;
+    margin-bottom: 22px;
+}
+
+.program-card .card-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 1.8;
+}
+
+.program-card h3 {
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+}
+
+.program-card p {
+    line-height: 1.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .program-card {
+        transition: none;
+    }
+
+    .program-card:hover {
+        transform: none;
+    }
+}
+
+.proposal-form textarea {
+    resize: none;
+}
+
+/* ==========================================
+   OSVEŽENA NASLOVNA SEKCIJA – DAMJAN KOPŠA
+   Pravila so na koncu datoteke, da imajo prednost.
+   ========================================== */
+.hero {
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 94% 10%, rgba(225, 238, 227, .9), transparent 35%),
+        linear-gradient(115deg, #f7faf7 0%, #fff 70%);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 470px;
+    height: 470px;
+    border: 1px solid rgba(0, 83, 55, .075);
+    border-radius: 50%;
+    left: -330px;
+    top: -220px;
+    pointer-events: none;
+}
+
+.hero-grid {
+    min-height: 675px;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    gap: clamp(35px, 5vw, 90px);
+    padding-top: 80px;
+    padding-bottom: 88px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 15px;
+    border: 1px solid #d8e8dd;
+    border-radius: 999px;
+    background: #edf5ef;
+    color: #005337;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 1.35px;
+}
+
+.eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: 50%;
+    background: #e3b600;
+}
+
+.hero h1 {
+    margin-top: 29px;
+    font-size: clamp(52px, 6.3vw, 88px);
+    line-height: 1.04;
+    letter-spacing: -3.8px;
+    text-wrap: balance;
+}
+
+.hero h1 span {
+    color: #006043;
+}
+
+.hero-subtitle {
+    margin-top: 19px;
+    font-size: clamp(22px, 2.3vw, 31px);
+    letter-spacing: -.7px;
+}
+
+.hero-rule {
+    width: 60px;
+    height: 4px;
+    margin-top: 23px;
+    background: #e7c500;
+    border-radius: 5px;
+}
+
+.hero-description {
+    margin-top: 23px;
+    max-width: 490px;
+    font-size: 17px;
+    line-height: 1.85;
+}
+
+.hero-actions {
+    gap: 12px;
+    margin-top: 33px;
+}
+
+.hero-actions .btn {
+    gap: 15px;
+    min-height: 53px;
+    border-radius: 10px;
+    padding: 14px 23px;
+    box-shadow: 0 6px 16px rgba(0, 55, 36, .045);
+}
+
+.hero-actions .btn-primary {
+    box-shadow: 0 12px 25px rgba(0, 83, 55, .16);
+}
+
+.hero-actions .btn span {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.hero-image {
+    min-width: 0;
+    padding: 17px 10px 0 0;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 445px;
+    height: clamp(420px, 39vw, 530px);
+    border-radius: 210px 210px 24px 24px;
+    object-fit: cover;
+    object-position: center top;
+    box-shadow: 0 28px 65px rgba(0, 56, 35, .16);
+}
+
+.hero-image-accent {
+    width: 88%;
+    max-width: 430px;
+    height: 86%;
+    right: -13px;
+    bottom: -17px;
+    border-radius: 210px 210px 24px 24px;
+    background: #f5d52e;
+}
+
+.hero-image-line {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    right: -35px;
+    top: -10px;
+    border: 1px solid rgba(0, 83, 55, .18);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@media (max-width: 900px) {
+    .hero-grid {
+        gap: 30px;
+    }
+
+    .hero h1 {
+        font-size: clamp(44px, 6vw, 68px);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 42px;
+        padding-top: 60px;
+        padding-bottom: 78px;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 10vw, 72px);
+        letter-spacing: -2.5px;
+    }
+
+    .hero-image {
+        width: min(100%, 420px);
+        margin: 0 auto;
+        padding-right: 8px;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+        height: 450px;
+    }
+
+    .hero-image-accent {
+        right: -8px;
+    }
+
+    .hero-image-line {
+        right: -12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-grid {
+        padding-top: 46px;
+        padding-bottom: 67px;
+    }
+
+    .hero .eyebrow {
+        font-size: 9px;
+        letter-spacing: .65px;
+        padding: 8px 11px;
+    }
+
+    .hero h1 {
+        margin-top: 25px;
+        font-size: clamp(45px, 12vw, 59px);
+    }
+
+    .hero-description {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .hero-image img {
+        height: 390px;
+    }
+
+    .hero-image-line {
+        display: none;
+    }
+}
+
+/* IZBOLJŠANA ZAČETNA STRAN NA TELEFONU */
+
+@media (max-width: 600px) {
+
+    .hero-grid {
+        gap: 0;
+        padding-top: 34px;
+        padding-bottom: 45px;
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: clamp(39px, 10vw, 50px);
+        line-height: 1.08;
+        letter-spacing: -2px;
+        margin-top: 18px;
+    }
+
+    .hero-subtitle {
+        font-size: 21px;
+        margin-top: 14px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-top: 16px;
+    }
+
+    .hero-actions {
+        gap: 10px;
+        margin-top: 22px;
+    }
+
+    .hero-actions .btn {
+        padding: 12px 18px;
+        min-height: 46px;
+        font-size: 13px;
+    }
+
+    .hero-image {
+        margin-top: 32px;
+    }
+
+    .hero-image img {
+        height: 330px;
+        max-width: 290px;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    .hero-image-accent {
+        width: 290px;
+        max-width: 90%;
+        height: 85%;
+        right: auto;
+        bottom: -12px;
+    }
+
+    .eyebrow {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-image {
+        margin-top: 15px;
+    }
+}
+
+/* PRENOVLJEN RAZDELEK O MENI */
+
+#omeni {
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #f7faf7 100%);
+}
+
+#omeni .about-grid {
+    gap: 90px;
+}
+
+#omeni .about-image {
+    padding: 18px;
+    border-radius: 28px;
+    background: #eaf3ed;
+}
+
+#omeni .about-image img {
+    position: relative;
+    z-index: 1;
+    border-radius: 20px;
+    max-height: 510px;
+    box-shadow: 0 18px 45px rgba(0, 65, 43, 0.10);
+}
+
+#omeni .about-image::before {
+    width: 110px;
+    height: 110px;
+    left: -12px;
+    bottom: -12px;
+    border-radius: 20px;
+}
+
+#omeni .section-content h2 {
+    font-size: clamp(30px, 3.5vw, 46px);
+    line-height: 1.2;
+}
+
+#omeni .section-content p {
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+#omeni .text-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 20px;
+    border: 1px solid #c9dfd0;
+    border-radius: 10px;
+    background: #edf5ef;
+    color: #005337;
+    transition: 0.25s ease;
+}
+
+#omeni .text-link:hover {
+    background: #005337;
+    color: white;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    #omeni .about-grid {
+        gap: 38px;
+    }
+
+    #omeni .about-image {
+        padding: 12px;
+        max-width: 430px;
+        margin: 0 auto;
+    }
+
+    #omeni .about-image img {
+        max-height: 420px;
+    }
+
+    #omeni .section-content h2 {
+        font-size: 31px;
+    }
+
+    #omeni .section-content p {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #omeni .text-link {
+        transition: none;
+    }
+}
+
+
+/* PRENOVLJEN RAZDELEK KANDIDATURA */
+
+#kandidatura {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f4f8f5, #edf4ef);
+}
+
+#kandidatura .section-description {
+    max-width: 760px;
+    line-height: 1.9;
+    margin-bottom: 22px;
+}
+
+#kandidatura .quote-card {
+    position: relative;
+    max-width: 800px;
+    margin: 45px auto 0;
+    padding: 55px 65px;
+    background: #ffffff;
+    border: 1px solid #dce9df;
+    border-bottom: 5px solid #ffdc00;
+    border-radius: 22px;
+    box-shadow: 0 20px 55px rgba(0, 65, 43, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#kandidatura .quote-mark {
+    display: block;
+    color: #005337;
+    font-size: 85px;
+    font-family: Georgia, serif;
+    line-height: 0.8;
+    margin-bottom: 18px;
+}
+
+#kandidatura .quote-card p {
+    font-size: clamp(19px, 2vw, 25px);
+    font-weight: 600;
+    line-height: 1.65;
+    color: #17211d;
+    margin-bottom: 26px;
+}
+
+#kandidatura .quote-card strong {
+    display: inline-block;
+    color: #005337;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+}
+
+@media (hover: hover) {
+    #kandidatura .quote-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 25px 65px rgba(0, 65, 43, 0.12);
+    }
+}
+
+@media (max-width: 600px) {
+    #kandidatura .quote-card {
+        padding: 35px 24px;
+        margin-top: 32px;
+        border-radius: 16px;
+    }
+
+    #kandidatura .quote-mark {
+        font-size: 65px;
+    }
+
+    #kandidatura .quote-card p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    #kandidatura .section-description {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #kandidatura .quote-card {
+        transition: none;
+    }
+
+    #kandidatura .quote-card:hover {
+        transform: none;
+    }
+}
+
+
+/* PRENOVLJENE KARTICE PRIORITET */
+
+#program .cards {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 48px;
+}
+
+#program .program-card {
+    grid-column: span 2;
+    min-height: 215px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #e0ebe3;
+    background: linear-gradient(145deg, #ffffff, #fbfdfb);
+    box-shadow: 0 12px 35px rgba(0, 65, 43, 0.05);
+}
+
+#program .program-card:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+#program .program-card:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+
+#program .program-card::before {
+    height: 4px;
+    background: #ffdc00;
+}
+
+#program .card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 15px;
+    background: #e8f3ec;
+}
+
+#program .program-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+#program .program-card p {
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+    #program .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #program .program-card,
+    #program .program-card:nth-child(4),
+    #program .program-card:nth-child(5) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    #program .cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 35px;
+    }
+
+    #program .program-card {
+        min-height: auto;
+        padding: 25px;
+    }
+}
+
+
+/* RAZDELEK DAMJAN ODGOVARJA */
+
+#odgovori {
+    background: linear-gradient(135deg, #f5f8f6, #edf4ef);
+}
+
+#odgovori .container.centered>p {
+    line-height: 1.8;
+}
+
+/* Obvestilo, kadar še ni odgovorov */
+#odgovori #odgovori-list:has(> p:only-child) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    text-align: center;
+}
+
+#odgovori #odgovori-list>p:only-child {
+    max-width: 460px;
+    width: 100%;
+    margin: 15px auto 25px;
+    padding: 28px 32px;
+    border: 1px solid #dce9df;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #52675c;
+    box-shadow: 0 12px 35px rgba(0, 65, 43, 0.05);
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    #odgovori #odgovori-list>p:only-child {
+        padding: 22px 20px;
+        margin: 12px auto 20px;
+        font-size: 14px;
+    }
+}
+
+/* PRAZNO STANJE - DAMJAN ODGOVARJA */
+
+#odgovori .answers-empty,
+#odgovori .empty-state,
+#odgovori .gallery-empty {
+    max-width: 480px;
+    margin: 25px auto;
+    padding: 28px 32px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #dce9df;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 65, 43, 0.06);
+    color: #52675c;
+    line-height: 1.8;
+}
+
+
+/* PRAZNO STANJE - DAMJAN ODGOVARJA */
+
+#odgovori #answersList:has(> p:only-child) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#odgovori #answersList>p:only-child {
+    width: 100%;
+    max-width: 480px;
+    margin: 20px auto 30px;
+    padding: 30px 35px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #dce9df;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 65, 43, 0.06);
+    color: #52675c;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    #odgovori #answersList>p:only-child {
+        padding: 24px 20px;
+        margin: 15px auto 25px;
+        font-size: 14px;
+    }
+}
+
+/* ==================================
+   VPRAŠAJTE DAMJANA – PRENOVLJEN VIDEZ
+================================== */
+
+#vprasanja {
+    background: linear-gradient(135deg, #ffffff 55%, #f2f8f4 100%);
+}
+
+#vprasanja .proposal-grid {
+    align-items: start;
+    gap: 75px;
+}
+
+#vprasanja .section-content {
+    padding-top: 35px;
+}
+
+#vprasanja .section-content p {
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+/* Bela kartica obrazca */
+
+#vprasanja .proposal-form {
+    background: #ffffff;
+    border: 1px solid #dce9df;
+    border-radius: 24px;
+    padding: 38px;
+    box-shadow: 0 20px 60px rgba(0, 70, 45, 0.08);
+}
+
+#vprasanja .proposal-form h3 {
+    color: #00583d;
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+#vprasanja .form-note {
+    color: #718078;
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+/* Oznake polj */
+
+#vprasanja .proposal-form label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #19372c;
+    margin: 20px 0 9px;
+}
+
+/* Vnosna polja */
+
+#vprasanja .proposal-form input,
+#vprasanja .proposal-form select,
+#vprasanja .proposal-form textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #f8fbf9;
+    border: 1px solid #d6e5da;
+    border-radius: 12px;
+    padding: 15px 16px;
+    font: inherit;
+    font-size: 14px;
+    color: #19372c;
+    transition: border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+#vprasanja .proposal-form textarea {
+    min-height: 155px;
+    resize: vertical;
+}
+
+/* Poudarek ob kliku */
+
+#vprasanja .proposal-form input:focus,
+#vprasanja .proposal-form select:focus,
+#vprasanja .proposal-form textarea:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: #006747;
+    box-shadow: 0 0 0 4px rgba(0, 103, 71, 0.10);
+}
+
+/* Cloudflare preverjanje */
+
+#vprasanja .cf-turnstile {
+    margin: 24px 0;
+}
+
+/* Gumb za oddajo */
+
+#vprasanja #submitQuestion {
+    width: 100%;
+    min-height: 52px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#vprasanja #submitQuestion:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 83, 55, 0.18);
+}
+
+#vprasanja #submitQuestion:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* Mobilna različica */
+
+@media (max-width: 768px) {
+    #vprasanja .proposal-grid {
+        gap: 35px;
+    }
+
+    #vprasanja .section-content {
+        padding-top: 0;
+    }
+
+    #vprasanja .proposal-form {
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+
+    #vprasanja .proposal-form h3 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 900px) {
+    .answers-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .answers-list {
+        grid-template-columns: 1fr;
+    }
+
+    .flip-card {
+        aspect-ratio: auto;
+        height: 300px;
+    }
+}
+
+/* Kompaktnejše kartice z vprašanji */
+
+@media (min-width: 901px) {
+    .flip-card {
+        aspect-ratio: auto;
+        height: 260px;
+        min-height: 0;
+    }
+}
+
+@media (max-width: 900px) and (min-width: 601px) {
+    .flip-card {
+        aspect-ratio: auto;
+        height: 250px;
+        min-height: 0;
+    }
+}
+
+.flip-card-back {
+    overflow: hidden;
+}
+
+/* Pet kartic: tri zgoraj, dve sredinsko spodaj */
+@media (min-width: 901px) {
+    #answersList.answers-list {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    #answersList.answers-list>.flip-card {
+        grid-column: span 2;
+        min-width: 0;
+    }
+
+    #answersList.answers-list>.flip-card:nth-child(4):nth-last-child(2) {
+        grid-column: 2 / span 2;
+    }
+
+    #answersList.answers-list>.flip-card:nth-child(5):last-child {
+        grid-column: 4 / span 2;
+    }
+}

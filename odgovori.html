@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vprašanja in odgovori | Damjan Kopša</title>
+    <meta name="description" content="Vprašanja občanov in javno objavljeni odgovori Damjana Kopše.">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="odgovori.css">
+
+    <script src="odgovori.js" defer></script>
+</head>
+
+<body class="gallery-page">
+
+    <header class="gallery-header">
+        <div class="gallery-header-inner">
+            <a href="index.html#domov" class="logo">
+                <span>Damjan <strong>Kopša</strong></span>
+                <small>KANDIDAT ZA ŽUPANA OBČINE ZAVRČ</small>
+            </a>
+
+            <a href="index.html#odgovori" class="gallery-back">
+                ← Nazaj na spletno stran
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="gallery-hero">
+            <div class="gallery-container">
+                <span class="gallery-eyebrow">
+                    POGOVOR Z OBČANI
+                </span>
+
+                <h1>Vaša vprašanja.<br>
+                    <span>Damjanovi odgovori.</span>
+                </h1>
+
+                <p>
+                    Preberite vprašanja občanov in odgovore
+                    Damjana Kopše. Kliknite na posamezno
+                    kartico, da se obrne in razkrije odgovor.
+                </p>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="gallery-container">
+
+                <div class="gallery-toolbar">
+                    <div class="gallery-search">
+                        <label for="answerSearch">
+                            Poiščite vprašanje
+                        </label>
+                        <input type="search" id="answerSearch" placeholder="Vnesite ključno besedo ..."
+                            autocomplete="off">
+                    </div>
+
+                    <div class="gallery-filter">
+                        <label for="categoryFilter">
+                            Kategorija
+                        </label>
+                        <select id="categoryFilter">
+                            <option value="Vse">
+                                Vse kategorije
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <p id="galleryCount" class="gallery-count" aria-live="polite">
+                    Nalaganje vprašanj ...
+                </p>
+
+                <div id="galleryGrid" class="gallery-grid">
+                </div>
+
+                <div class="gallery-more">
+                    <button id="loadMoreButton" type="button" hidden>
+                        Prikaži več vprašanj ↓
+                    </button>
+                </div>
+
+                <div class="gallery-bottom">
+                    <h2>Imate tudi vi vprašanje?</h2>
+                    <p>
+                        Damjanu lahko pošljete svoje vprašanje
+                        prek obrazca na spletni strani.
+                    </p>
+                    <a href="index.html#vprasanja" class="gallery-ask">
+                        Vprašajte Damjana →
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="gallery-footer">
+        <p>
+            © <span id="galleryYear"></span>
+            Damjan Kopša
+        </p>
+        <a href="index.html">
+            Nazaj na začetno stran
+        </a>
+    </footer>
+    <!-- Cloudflare Web Analytics -->
+    <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "4e52d7b861634bae87bcf1711ae4e96a"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+
+</html>
