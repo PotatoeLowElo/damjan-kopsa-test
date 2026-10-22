@@ -2240,3 +2240,56 @@ button {
     }
 }
 
+/* FACEBOOK IN WHATSAPP */
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.footer-social .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: #ffffff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.footer-social .social-link svg {
+    width: 23px;
+    height: 23px;
+}
+
+.footer-social .facebook {
+    background: #1877f2;
+}
+
+.footer-social .whatsapp {
+    background: #25d366;
+}
+
+.footer-social .social-link:hover {
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.footer-social .social-link:focus-visible {
+    outline: 3px solid #ffdc00;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-social .social-link {
+        transition: none;
+    }
+
+    .footer-social .social-link:hover {
+        transform: none;
+    }
+}
