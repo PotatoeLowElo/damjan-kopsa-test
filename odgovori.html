@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="odgovori.css">
 
+    <script src="answers-ui.js" defer></script>
     <script src="odgovori.js" defer></script>
 </head>
 
@@ -42,8 +43,8 @@
 
                 <p>
                     Preberite vprašanja občanov in odgovore
-                    Damjana Kopše. Kliknite na posamezno
-                    kartico, da se obrne in razkrije odgovor.
+                    Damjana Kopše. Obrnite kartico z gumbom »Pokaži odgovor«
+                    ali odprite celoten odgovor za udobnejše branje.
                 </p>
             </div>
         </section>
@@ -57,14 +58,15 @@
                             Poiščite vprašanje
                         </label>
                         <input type="search" id="answerSearch" placeholder="Vnesite ključno besedo ..."
-                            autocomplete="off">
+                            autocomplete="off" aria-describedby="searchHelp" aria-controls="galleryGrid">
+                        <small id="searchHelp">Iskanje po vprašanjih in odgovorih.</small>
                     </div>
 
                     <div class="gallery-filter">
                         <label for="categoryFilter">
                             Kategorija
                         </label>
-                        <select id="categoryFilter">
+                        <select id="categoryFilter" aria-controls="galleryGrid">
                             <option value="Vse">
                                 Vse kategorije
                             </option>
@@ -76,7 +78,7 @@
                     Nalaganje vprašanj ...
                 </p>
 
-                <div id="galleryGrid" class="gallery-grid">
+                <div id="galleryGrid" class="gallery-grid" aria-busy="true">
                 </div>
 
                 <div class="gallery-more">

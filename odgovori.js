@@ -52,9 +52,11 @@ async function loadGallery() {
     } catch (error) {
         galleryCount.textContent =
             "Vprašanj trenutno ni mogoče naložiti.";
-        galleryGrid.replaceChildren();
+        galleryGrid.replaceChildren(AnswersUI.message("Vprašanj trenutno ni mogoče naložiti.", "Osvežite stran in poskusite znova."));
         loadMoreButton.hidden = true;
         console.error(error);
+    } finally {
+        galleryGrid.setAttribute("aria-busy", "false");
     }
 }
 
@@ -101,73 +103,6 @@ function getFilteredAnswers() {
     });
 }
 
-function createFlipCard(item) {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "flip-card";
-    card.setAttribute("aria-pressed", "false");
-
-    const inner = document.createElement("span");
-    inner.className = "flip-card-inner";
-
-    const front = document.createElement("span");
-    front.className = "flip-card-front";
-
-    const frontLabel = document.createElement("span");
-    frontLabel.className = "flip-label";
-    frontLabel.textContent = item.kategorija || "VPRAŠANJE";
-
-    const question = document.createElement("span");
-    question.className = "flip-question";
-    question.textContent = item.vprasanje || "";
-
-    const frontHint = document.createElement("span");
-    frontHint.className = "flip-hint";
-    frontHint.textContent = "↻ Kliknite za odgovor";
-
-    front.append(frontLabel, question, frontHint);
-
-    const back = document.createElement("span");
-    back.className = "flip-card-back";
-
-    const backLabel = document.createElement("span");
-    backLabel.className = "flip-label";
-    backLabel.textContent = "DAMJANOV ODGOVOR";
-
-    const answer = document.createElement("span");
-    answer.className = "flip-answer";
-    answer.textContent = item.odgovor || "";
-
-    const backHint = document.createElement("span");
-    backHint.className = "flip-hint";
-    backHint.textContent = "↻ Nazaj na vprašanje";
-
-    back.append(backLabel, answer, backHint);
-
-    inner.append(front, back);
-    card.appendChild(inner);
-
-    card.setAttribute(
-        "aria-label",
-        `Vprašanje: ${item.vprasanje}. Kliknite za odgovor.`
-    );
-
-    card.addEventListener("click", () => {
-        const flipped = card.classList.toggle("flipped");
-
-        card.setAttribute("aria-pressed", String(flipped));
-
-        card.setAttribute(
-            "aria-label",
-            flipped
-                ? `Odgovor: ${item.odgovor}. Kliknite za vprašanje.`
-                : `Vprašanje: ${item.vprasanje}. Kliknite za odgovor.`
-        );
-    });
-
-    return card;
-}
-
 function renderGallery() {
     const filtered = getFilteredAnswers();
     const visible = filtered.slice(0, visibleCount);
@@ -175,16 +110,27 @@ function renderGallery() {
     galleryGrid.replaceChildren();
 
     visible.forEach(item => {
-        galleryGrid.appendChild(createFlipCard(item));
+        galleryGrid.appendChild(AnswersUI.createCard(item));
     });
 
     if (filtered.length === 0) {
-        const empty = document.createElement("p");
-        empty.className = "gallery-empty";
-        empty.textContent = allAnswers.length === 0
-            ? "Trenutno še ni objavljenih odgovorov."
-            : "Za izbrane kriterije ni vprašanj.";
-
+        const empty = allAnswers.length === 0
+            ? AnswersUI.message("Trenutno še ni objavljenih odgovorov.", "Ko bodo odgovori objavljeni, jih boste našli tukaj. Svoje vprašanje lahko oddate prek povezave spodaj.")
+            : AnswersUI.message("Ni zadetkov za izbrano iskanje.", "Poskusite z drugo ključno besedo ali ponastavite iskanje in kategorijo.");
+        if (allAnswers.length > 0) {
+            const reset = document.createElement("button");
+            reset.type = "button";
+            reset.className = "qa-reset";
+            reset.textContent = "Ponastavi iskanje in filtre";
+            reset.addEventListener("click", () => {
+                answerSearch.value = "";
+                categoryFilter.value = "Vse";
+                visibleCount = 12;
+                renderGallery();
+                answerSearch.focus();
+            });
+            empty.appendChild(reset);
+        }
         galleryGrid.appendChild(empty);
     }
 
@@ -205,8 +151,10 @@ categoryFilter.addEventListener("change", () => {
 });
 
 loadMoreButton.addEventListener("click", () => {
+    const previousCount = visibleCount;
     visibleCount += 12;
     renderGallery();
+    galleryGrid.children[previousCount]?.querySelector(".qa-toggle")?.focus();
 });
 
 loadGallery();
