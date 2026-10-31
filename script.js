@@ -385,9 +385,9 @@ async function loadPublicAnswers() {
         }
 
         answers.slice(0, 5).forEach(item => {
-const card = document.createElement("div");
-card.setAttribute("role", "button");
-card.setAttribute("tabindex", "0");
+            const card = document.createElement("div");
+            card.setAttribute("role", "button");
+            card.setAttribute("tabindex", "0");
             card.className = "flip-card";
             card.setAttribute("aria-pressed", "false");
             card.setAttribute(
